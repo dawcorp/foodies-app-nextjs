@@ -13,7 +13,7 @@ export default function MealDetailsPage({ params }) {
     <>
       <header className={classes.header}>
         <div className={classes.image}>
-          <Image fill src={meal.image} />
+          <Image fill src={meal.image} alt="Food image" />
         </div>
         <div className={classes.headerText}>
           <h1>{meal.title}</h1>
