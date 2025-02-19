@@ -3,6 +3,17 @@ import classes from "./page.module.css";
 import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
+export async function generateMetadata({ params }) {
+  const meal = getMeal(params.mealSlug);
+  if (!meal) {
+    return notFound();
+  }
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
+
 export default function MealDetailsPage({ params }) {
   const meal = getMeal(params.mealSlug);
   if (!meal) {
@@ -15,7 +26,7 @@ export default function MealDetailsPage({ params }) {
         <div className={classes.image}>
           <Image
             fill
-            src={`${process.env.AWS_BUCKET_NAME}/${meal.image}`}
+            src={`https://${process.env.AWS_BUCKET_NAME}/${meal.image}`}
             alt="Food image"
           />
         </div>
